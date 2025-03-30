@@ -1,1 +1,25 @@
-<p>crud-courses works!</p>
+<div class="container">
+    <h2>Gestión de Cursos</h2>
+  
+    <!-- Formulario para agregar o editar cursos -->
+    <form (ngSubmit)="editMode ? updateCourse() : addCourse()">
+        <input type="text" placeholder="Imagen URL" [(ngModel)]="course.image" name="image" required>
+        <input type="text" placeholder="Título" [(ngModel)]="course.title" name="title" required>
+        <textarea placeholder="Descripción" [(ngModel)]="course.description" name="description" required></textarea>
+        <input type="number" placeholder="Valor" [(ngModel)]="course.value" name="value" required>
+        <button type="submit">{{ editMode ? 'Actualizar Curso' : 'Agregar Curso' }}</button>
+        <button type="button" (click)="cancelEdit()" *ngIf="editMode">Cancelar</button>
+      </form>
+      
+  
+    <!-- Lista de cursos -->
+    <div *ngFor="let course of courses" class="course-card">
+      <img [src]="course.image" alt="Imagen del curso">
+      <h3>{{ course.title }}</h3>
+      <p>{{ course.description }}</p>
+      <p><strong>Valor: </strong>{{ course.value }}</p>
+      <button (click)="editCourse(course)">Editar</button>
+      <button (click)="deleteCourse(course.id!)">Eliminar</button>
+    </div>
+  </div>
+  
