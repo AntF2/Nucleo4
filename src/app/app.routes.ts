@@ -17,6 +17,7 @@ import { MessageComponent } from './user/message/message.component';
 import { CoursesComponent } from './user/courses/courses.component';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
 import { PostWorksComponent } from './user/post-works/post-works.component';
+import { Error404Component } from './components/error404/error404.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' }, 
@@ -26,6 +27,7 @@ export const routes: Routes = [
     { path: 'nav', component: NavComponent },
     { path: 'blog', component: BlogComponent },
     { path: 'contact', component: ContactComponent },
+
 
     // User
     { path: 'homeUser', component: HomeUserComponent, canActivate: [UserGuard] },
@@ -39,6 +41,6 @@ export const routes: Routes = [
     { path: 'courses', component: CrudCoursesComponent, canActivate: [AdminGuard] },
     { path: 'teachers', component: CrudTeachersComponent, canActivate: [AdminGuard] },
     { path: 'users', component: CrudUsersComponent, canActivate: [AdminGuard] },
-    { path: 'messages', component: MessagesComponent, canActivate: [AdminGuard] },
+    { path: 'message', component: MessagesComponent, canActivate: [AdminGuard] },
 ];
 

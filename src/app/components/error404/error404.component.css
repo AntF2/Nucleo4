@@ -1,0 +1,39 @@
+.not-found-container {
+    text-align: center;
+    padding: 50px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .not-found-container h1 {
+    font-size: 120px;
+    font-weight: bold;
+    color: #ff4757;
+    margin: 0;
+  }
+  
+  .not-found-container h2 {
+    font-size: 28px;
+    color: #333;
+  }
+  
+  .not-found-container p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .not-found-container button {
+    padding: 10px 20px;
+    font-size: 18px;
+    color: white;
+    background-color: #ff4757;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .not-found-container button:hover {
+    background-color: #e84118;
+  }
+  

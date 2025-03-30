@@ -1,9 +1,10 @@
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
-  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.gstatic.com" >
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-  <header>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+
+<header>
     <a routerLink="/" class="logo"><i class="ri-home-heart-fill"></i><span>Logo</span></a>
 
     <ul class="navbar">
@@ -22,26 +23,30 @@
             <li><a routerLink="/course">Cursos</a></li>
             <li><a routerLink="/messages">Mensajes</a></li>
             <li><a routerLink="/postWorks">Publicaciones</a></li>
+            <li><a routerLink="/profile" class="user"><i class="ri-user-fill"></i>Perfil</a></li>
         </ng-container>
 
         <!-- Menú para administrador -->
         <ng-container *ngIf="role === 'admin'">
-            <li><a routerLink="homeAdmin">Inicio</a></li>
-            <li><a routerLink="courses">Cursos</a></li>
-            <li><a routerLink="teachers">Profesores</a></li>
-            <li><a routerLink="users">Usuarios</a></li>
-            <li><a routerLink="messages">Mensajes</a></li>
+            <li><a routerLink="/homeAdmin">Inicio</a></li>
+            <li><a routerLink="/courses">Cursos</a></li>
+            <li><a routerLink="/teachers">Profesores</a></li>
+            <li><a routerLink="/users">Usuarios</a></li>
+            <li><a routerLink="/messages">Mensajes</a></li>
         </ng-container>
     </ul>
 
     <div class="main">
         <ng-container *ngIf="currentUser; else login">
-            <a routerLink="/profile" class="user"><i class="ri-user-fill"></i>Perfil</a>
+            <!-- Mostrar botón de cerrar sesión si el usuario está autenticado -->
             <button (click)="logout()" class="logout-btn">Cerrar sesión</button>
         </ng-container>
         <ng-template #login>
+            <!-- Mostrar enlace de inicio de sesión/registro si el usuario no está autenticado -->
             <a routerLink="/loginregister" class="user"><i class="ri-user-fill"></i>Iniciar Sesión/Registrarse</a>
         </ng-template>
+
+        <!-- Menú desplegable (opcional) -->
         <div class="bx bx-menu" id="menu-icon"></div>
     </div>
 </header>

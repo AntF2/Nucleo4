@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';  // Importa Router para las redirecciones
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class AuthService {
   private db = getFirestore();
   private currentUserSubject = new BehaviorSubject<any>(null);
 
-  constructor() {
+  constructor(private router: Router) {
     onAuthStateChanged(this.auth, (user) => {
       this.currentUserSubject.next(user);
     });
@@ -41,7 +42,17 @@ export class AuthService {
   async login(email: string, password: string) {
     try {
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
-      return userCredential.user;
+      const user = userCredential.user;
+
+      // Redirigir según el rol del usuario
+      const isAdmin = await this.isAdmin(); // Verifica si es admin
+      if (isAdmin) {
+        this.router.navigate(['/homeAdmin']);  // Redirige al homeAdmin si es admin
+      } else {
+        this.router.navigate(['/homeUser']);  // Redirige al homeUser si es usuario normal
+      }
+
+      return user;
     } catch (error) {
       throw error;
     }
@@ -85,6 +96,7 @@ export class AuthService {
     try {
       await this.auth.signOut();
       this.currentUserSubject.next(null);  // Limpiar el estado del usuario
+      this.router.navigate(['/home']);  // Redirigir al home después de cerrar sesión
     } catch (error) {
       console.error("Error al cerrar sesión: ", error);
     }
