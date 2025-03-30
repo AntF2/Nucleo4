@@ -1,11 +1,11 @@
-    <link rel="stylesheet" href="./login-register.component.css">
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="./login-register.component.css">
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
 <body>
-
     <div class="container" id="container">
-        <div class="form-container sign-up">
-            <form>
+        <!-- Formulario de Registro -->
+        <div class="form-container sign-up" *ngIf="!isLogin">
+            <form (ngSubmit)="onSubmit()">
                 <h1>Crear cuenta</h1>
                 <div class="social-icons">
                     <a href="#" class="icons"><i class="bx bxl-google"></i></a>
@@ -13,42 +13,44 @@
                     <a href="#" class="icons"><i class="bx bxl-github"></i></a>
                     <a href="#" class="icons"><i class="bx bxl-linkedin"></i></a>
                 </div>
-                <span>Registrarse con correo electronico</span>
-                <input type="text" placeholder="Name">
-                <input type="email" placeholder="Enter E-mail">
-                <input type="password" placeholder="Enter Password">
-                <button>Registrarse</button>
+                <span>Registrarse con correo electrónico</span>
+                <input type="text" [(ngModel)]="name" name="name" placeholder="Name" required>
+                <input type="email" [(ngModel)]="email" name="email" placeholder="Enter E-mail" required>
+                <input type="password" [(ngModel)]="password" name="password" placeholder="Enter Password" required>
+                <button type="submit">Registrarse</button>
             </form>
         </div>
 
-        <div class="form-container sign-in">
-            <form>
-                <h1>Iniciar sesion</h1>
+        <!-- Formulario de Login -->
+        <div class="form-container sign-in" *ngIf="isLogin">
+            <form (ngSubmit)="onSubmit()">
+                <h1>Iniciar sesión</h1>
                 <div class="social-icons">
                     <a href="#" class="icons"><i class="bx bxl-google"></i></a>
                     <a href="#" class="icons"><i class="bx bxl-facebook"></i></a>
                     <a href="#" class="icons"><i class="bx bxl-github"></i></a>
                     <a href="#" class="icons"><i class="bx bxl-linkedin"></i></a>
                 </div>
-                <span>Iniciar sesion con correo electronico</span>
-                <input type="email" placeholder="Enter E-mail">
-                <input type="password" placeholder="Enter Password">
-                <a href="#">Olvide mi contraseña</a>
-                <button>Iniciar sesion</button>
+                <span>Iniciar sesión con correo electrónico</span>
+                <input type="email" [(ngModel)]="email" name="email" placeholder="Enter E-mail" required>
+                <input type="password" [(ngModel)]="password" name="password" placeholder="Enter Password" required>
+                <a href="#">Olvidé mi contraseña</a>
+                <button type="submit">Iniciar sesión</button>
             </form>
         </div>
 
+        <!-- Contenedor de alternancia entre Login y Registro -->
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
-                    <h1> Hola, Bienvenido <br> Iniciar sesion</h1>
-                    <p> No tienes una cuenta?</p>
-                    <button class="hidden" id="login">Iniciar sesion</button>
+                    <h1>Hola, Bienvenido </h1>
+                    <p>Ya tienes una cuenta?</p>
+                    <button class="hidden" id="login" (click)="toggleForm()">Iniciar sesión</button>
                 </div>
                 <div class="toggle-panel toggle-right">
-                    <h1> Hola, Bienvenido <br> Registrarse</h1>
-                    <p> Ya tienes una cuenta? </p>
-                    <button class="hidden" id="register">Registrarse</button>
+                    <h1>Hola, Bienvenido</h1>
+                    <p>¿No tienes una cuenta?</p>
+                    <button class="hidden" id="register" (click)="toggleForm()">Registrarse</button>
                 </div>
             </div>
         </div>

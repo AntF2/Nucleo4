@@ -1,22 +1,35 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
-<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.gstatic.com" >
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+<header>
+    <a href="#" class="logo"><i class="ri-home-heart-fill"></i><span>Logo</span></a>
+  
+    <ul class="navbar">
+      <li><a [routerLink]="['/home']" class="active">Inicio</a></li>
+      <li><a [routerLink]="['/about']">Nosotros</a></li>
+      <li><a href="#">Servicios</a></li>
+      <li><a [routerLink]="['/blog']">Blog</a></li>
+      <li><a [routerLink]="['/contact']">Contacto</a></li>
+  
+      <!-- Menú Admin (Solo se muestra si es admin) -->
+      <li *ngIf="isAdmin"><a [routerLink]="['/homeAdmin']">Dashboard</a></li>
+      <li *ngIf="isAdmin"><a [routerLink]="['/courses']">Cursos</a></li>
+      <li *ngIf="isAdmin"><a [routerLink]="['/teachers']">Profesores</a></li>
+      <li *ngIf="isAdmin"><a [routerLink]="['/users']">Usuarios</a></li>
+      <li *ngIf="isAdmin"><a [routerLink]="['/messages']">Mensajes</a></li>
+  
+      <!-- Menú User (Solo se muestra si es usuario) -->
+      <li *ngIf="!isAdmin"><a [routerLink]="['/homeUser']">Mi Página</a></li>
+      <li *ngIf="!isAdmin"><a [routerLink]="['/messages']">Mensajes</a></li>
+      <li *ngIf="!isAdmin"><a [routerLink]="['/course']">Mis Cursos</a></li>
+      <li *ngIf="!isAdmin"><a [routerLink]="['/profile']">Perfil</a></li>
+      <li *ngIf="!isAdmin"><a [routerLink]="['/postWorks']">Subir Trabajos</a></li>
 
-    <header>
-        <a href="#" class="logo"><i class="ri-home-heart-fill"></i><span>Logo</span></a>
-
-        <ul class="navbar">
-            <li><a href="home" class="active">Inicio</a></li>
-            <li><a href="about">Nosotros</a></li>
-            <li><a href="#">Servicios</a></li>
-            <li><a href="blog">Blog</a></li>
-            <li><a href="contact">Contacto</a></li>
-        </ul>
-
-        <div class="main">
-            <a href="login-register" class="user"><i class="ri-user-fill"></i>Iniciar Sesión/Registrarse</a>
-            <div class="bx bx-menu" id="menu-icon"></div>
-        </div>
-    </header>
+      <!-- Botón de Cerrar Sesión -->
+      <li *ngIf="currentUser">
+        <button (click)="logout()">Cerrar Sesión</button>
+      </li>
+    </ul>
+  
+    <div class="main">
+      <a href="loginregister" class="user" *ngIf="!currentUser"><i class="ri-user-fill"></i>Iniciar Sesión/Registrarse</a>
+      <div class="bx bx-menu" id="menu-icon"></div>
+    </div>
+</header>
