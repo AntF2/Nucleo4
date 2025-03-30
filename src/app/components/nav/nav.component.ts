@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';  // Asegúrate de que el servicio esté importado
-import { RouterLink } from '@angular/router';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, AfterViewInit {
   currentUser: any;
-  isAdmin: boolean = false;  // Variable para determinar si el usuario es admin
+  role: string | null = null;
 
   constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.checkUserRole();
+  }
 
   ngAfterViewInit() {
     let menu = document.querySelector('#menu-icon') as HTMLElement;
@@ -28,30 +32,23 @@ export class NavComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    // Inicializar la verificación del rol
-    this.checkUserRole();
-  }
-
-  // Método para comprobar el rol del usuario
+  // Método para verificar el rol del usuario
   checkUserRole() {
-    this.authService.getCurrentUser().subscribe(user => {
-      this.currentUser = user; // Obtiene el usuario actual
+    this.authService.getCurrentUser().subscribe(async (user) => {
+      this.currentUser = user;
 
-      // Si hay un usuario autenticado, verificar si es admin
       if (user) {
-        this.authService.isAdmin().then(isAdmin => {
-          this.isAdmin = isAdmin;  // Establece si es admin
-        });
+        this.role = await this.authService.getUserRole();
+      } else {
+        this.role = null;
       }
     });
   }
 
   // Método para cerrar sesión
   logout() {
-    this.authService.logout();
-    alert("Has cerrado sesión exitosamente");
-    // Opcionalmente, puedes redirigir al login después de cerrar sesión
-    // this.router.navigate(['/login']);
+    this.authService.logout().then(() => {
+      alert("Has cerrado sesión exitosamente");
+    });
   }
 }

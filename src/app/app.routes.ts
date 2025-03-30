@@ -19,7 +19,7 @@ import { EditUserComponent } from './user/edit-user/edit-user.component';
 import { PostWorksComponent } from './user/post-works/post-works.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/login-register', pathMatch: 'full' }, // Redirige la ruta raíz a login-register
+    { path: '', redirectTo: 'home', pathMatch: 'full' }, 
     { path: 'home', component: HomeComponent },
     { path: 'about', component: AboutComponent },
     { path: 'loginregister', component: LoginRegisterComponent }, 
@@ -27,19 +27,18 @@ export const routes: Routes = [
     { path: 'blog', component: BlogComponent },
     { path: 'contact', component: ContactComponent },
 
-    //User
+    // User
     { path: 'homeUser', component: HomeUserComponent, canActivate: [UserGuard] },
     { path: 'messages', component: MessageComponent, canActivate: [UserGuard] },
     { path: 'course', component: CoursesComponent, canActivate: [UserGuard] },
     { path: 'profile', component: EditUserComponent, canActivate: [UserGuard] },
     { path: 'postWorks', component: PostWorksComponent, canActivate: [UserGuard] },
 
-    //Admin
+    // Admin
     { path: 'homeAdmin', component: HomeAdminComponent, canActivate: [AdminGuard] },
     { path: 'courses', component: CrudCoursesComponent, canActivate: [AdminGuard] },
     { path: 'teachers', component: CrudTeachersComponent, canActivate: [AdminGuard] },
     { path: 'users', component: CrudUsersComponent, canActivate: [AdminGuard] },
     { path: 'messages', component: MessagesComponent, canActivate: [AdminGuard] },
-    
-    
 ];
+
