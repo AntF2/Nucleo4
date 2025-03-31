@@ -1,57 +1,63 @@
 import { Component, OnInit } from '@angular/core';
+import { CoursesService } from '../../services/course.service';
+import { TeachersService } from '../../services/teachers.service';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CourseService, Course } from '../../services/course.service';
-import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-crud-courses',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [ FormsModule, CommonModule],
   templateUrl: './crud-courses.component.html',
   styleUrls: ['./crud-courses.component.css']
-})export class CrudCoursesComponent implements OnInit {
-  courses: Course[] = [];
-  course: Course = { image: '', title: '', description: '', value: 0 }; // Variable usada en el formulario
-  editMode = false;
-  courseToEdit: Course | null = null;
+})
+export class CrudCoursesComponent implements OnInit {
+  courses: any[] = [];
+  teachers: any[] = [];
+  course: any = { id: null, title: '', description: '', price: '', professorId: '', imageUrl: '' };
+  editing: boolean = false;
 
-  constructor(private courseService: CourseService) {}
+  constructor(
+    private coursesService: CoursesService,
+    private teachersService: TeachersService // Injectamos el servicio de profesores
+  ) {}
 
   ngOnInit() {
-    this.courseService.getCourses().subscribe(data => {
-      this.courses = data;
+    // Cargar cursos y profesores
+    this.coursesService.getCourses().subscribe((courses) => {
+      this.courses = courses;
+    });
+
+    this.teachersService.getTeachers().subscribe((teachers) => {
+      this.teachers = teachers;
     });
   }
 
-  addCourse() {
-    this.courseService.addCourse(this.course).then(() => {
-      this.course = { image: '', title: '', description: '', value: 0 }; // Reiniciar formulario
+  // Crear o editar un curso
+  saveCourse() {
+    this.coursesService.saveCourse(this.course).then(() => {
+      alert(this.editing ? 'Curso actualizado' : 'Curso creado');
+      this.course = { id: null, title: '', description: '', price: '', professorId: '', imageUrl: '' }; // Limpiar formulario
+      this.editing = false;
     });
   }
 
-  editCourse(course: Course) {
-    this.editMode = true;
-    this.courseToEdit = { ...course };
-    this.course = this.courseToEdit; // Usar course en el formulario
+  // Editar un curso
+  editCourse(course: any) {
+    this.course = { ...course };
+    this.editing = true;
   }
 
-  updateCourse() {
-    if (this.courseToEdit) {
-      this.courseService.updateCourse(this.course).then(() => {
-        this.editMode = false;
-        this.courseToEdit = null;
-        this.course = { image: '', title: '', description: '', value: 0 }; // Reiniciar formulario
-      });
+  // Eliminar un curso
+  deleteCourse(courseId: string) {
+    if (confirm('¿Estás seguro de que deseas eliminar este curso?')) {
+      this.coursesService.deleteCourse(courseId);
     }
   }
 
-  deleteCourse(courseId: string) {
-    this.courseService.deleteCourse(courseId);
-  }
-
-  cancelEdit() {
-    this.editMode = false;
-    this.courseToEdit = null;
-    this.course = { image: '', title: '', description: '', value: 0 }; // Reiniciar formulario
+  // Obtener el nombre del profesor
+  getProfessorName(professorId: string) {
+    const professor = this.teachers.find(teacher => teacher.id === professorId);
+    return professor ? professor.name : 'No asignado';
   }
 }
