@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.projects-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #07074d;
+}
+
+/* Lista de proyectos */
+.projects-list {
+  list-style: none;
+  padding: 0;
+}
+
+.project-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.project-item:hover {
+  transform: translateY(-5px);
+}
+
+.project-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.project-info {
+  flex: 1;
+}
+
+.project-info h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #07074d;
+  margin-bottom: 8px;
+}
+
+.project-info p {
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+.project-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #00a2ff;
+  display: block;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #4e92ff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #4fbf4d;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .project-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .project-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  button {
+    width: 100%;
+  }
+}

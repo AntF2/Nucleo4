@@ -1,29 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../../services/course.service';
 import { TeachersService } from '../../services/teachers.service';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { CoursesFormComponent } from '../../components/courses-form/courses-form.component';
 
 @Component({
   selector: 'app-crud-courses',
   standalone: true,
-  imports: [ FormsModule, CommonModule],
+  imports: [CommonModule, FormsModule, CoursesFormComponent],
   templateUrl: './crud-courses.component.html',
   styleUrls: ['./crud-courses.component.css']
 })
 export class CrudCoursesComponent implements OnInit {
   courses: any[] = [];
-  teachers: any[] = [];
-  course: any = { id: null, title: '', description: '', price: '', professorId: '', imageUrl: '' };
   editing: boolean = false;
+  courseToEdit: any = null;
+  showForm: boolean = false;
+  teachers: any[] = [];
 
   constructor(
     private coursesService: CoursesService,
-    private teachersService: TeachersService // Injectamos el servicio de profesores
+    private teachersService: TeachersService
   ) {}
 
   ngOnInit() {
-    // Cargar cursos y profesores
     this.coursesService.getCourses().subscribe((courses) => {
       this.courses = courses;
     });
@@ -32,26 +33,37 @@ export class CrudCoursesComponent implements OnInit {
       this.teachers = teachers;
     });
   }
+  refreshPage() {
+    window.location.reload();
+  }
+  
 
-  // Crear o editar un curso
-  saveCourse() {
-    this.coursesService.saveCourse(this.course).then(() => {
-      alert(this.editing ? 'Curso actualizado' : 'Curso creado');
-      this.course = { id: null, title: '', description: '', price: '', professorId: '', imageUrl: '' }; // Limpiar formulario
+  // Mostrar el formulario de agregar/editar curso
+  toggleForm(course: any = null) {
+    this.showForm = !this.showForm;
+    if (course) {
+      this.courseToEdit = { ...course };
+      this.editing = true;
+    } else {
+      this.courseToEdit = { id: null, title: '', description: '', price: '', professorId: '', imageUrl: '' };
       this.editing = false;
-    });
+    }
   }
 
-  // Editar un curso
-  editCourse(course: any) {
-    this.course = { ...course };
-    this.editing = true;
+  // Recargar la lista de cursos luego de agregar/editar
+  courseSaved() {
+    this.coursesService.getCourses().subscribe((courses) => {
+      this.courses = courses;
+    });
+    this.toggleForm();
   }
 
   // Eliminar un curso
   deleteCourse(courseId: string) {
     if (confirm('¿Estás seguro de que deseas eliminar este curso?')) {
-      this.coursesService.deleteCourse(courseId);
+      this.coursesService.deleteCourse(courseId).then(() => {
+        this.courses = this.courses.filter(course => course.id !== courseId);
+      });
     }
   }
 

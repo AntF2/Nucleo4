@@ -1,1 +1,62 @@
-<p>home-admin works!</p>
+<br>
+<br>
+
+<div class="dashboard">
+    <h2>Bienvenido al Panel de Administración</h2>
+    
+    <div class="overview-cards">
+      <div class="card">
+        <h3>Cursos</h3>
+        <p>{{ dashboardData.coursesCount }}</p>
+      </div>
+    
+      <div class="card">
+        <h3>Estudiantes</h3>
+        <p>{{ dashboardData.studentsCount }}</p>
+      </div>
+    
+      <div class="card">
+        <h3>Profesores</h3>
+        <p>{{ dashboardData.teachersCount }}</p>
+      </div>
+    
+      <div class="card">
+        <h3>Total de Proyectos</h3>
+        <p>{{ dashboardData.projectsCount }}</p>
+      </div>
+    </div>
+  
+    <div class="enrolled-users">
+      <h3>Usuarios Inscritos a Cursos</h3>
+      <ul>
+        <li *ngFor="let user of dashboardData.enrolledUsers">
+          <span>{{ user.name }}</span> - <span>{{ user.courseTitle }}</span>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Nueva sección de Proyectos -->
+    <div class="projects">
+      <h3>Lista de Proyectos</h3>
+      <div class="project-cards">
+        <div class="project-card" *ngFor="let project of dashboardData.projects">
+          <img [src]="project.imageUrl" alt="{{ project.title }}" class="project-image" />
+          <h4>{{ project.title }}</h4>
+          <p>{{ project.description }}</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Nueva sección de Cursos en formato Carta -->
+    <div class="courses">
+      <h3>Cursos Disponibles</h3>
+      <div class="course-cards">
+        <div class="course-card" *ngFor="let course of dashboardData.courses">
+          <img [src]="course.imageUrl" alt="{{ course.title }}" class="course-image" />
+          <h4>{{ course.title }}</h4>
+          <p>{{ course.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

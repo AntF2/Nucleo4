@@ -1,0 +1,28 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!-- Mostrar el botón para agregar un nuevo proyecto -->
+<button (click)="addNewProject()">Agregar Nuevo Proyecto</button>
+
+<!-- Mostrar el formulario solo si showProjectForm es verdadero -->
+<app-project-form *ngIf="showProjectForm" (save)="saveProject($event)" (cancel)="cancelForm()"></app-project-form>
+
+<!-- Mostrar los proyectos en tarjetas -->
+<div class="projects-list">
+  <div class="project-card" *ngFor="let project of projects">
+    <h3>{{ project.title }}</h3>
+    <p>{{ project.description }}</p>
+    <a class="price">Precio: ${{ project.price }}</a>
+    <img [src]="project.imageUrl" alt="{{ project.title }}">
+
+    <!-- Botones de editar y eliminar -->
+    <button (click)="editProject(project)">Editar</button>
+    <button (click)="deleteProject(project.id)">Eliminar</button>
+  </div>
+</div>

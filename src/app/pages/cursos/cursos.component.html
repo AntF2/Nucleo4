@@ -1,0 +1,36 @@
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container">
+    <h2>Cursos y Proyectos Disponibles</h2>
+  
+    <!-- Sección de Cursos -->
+    <div class="section">
+      <h3>Cursos Disponibles</h3>
+      <div class="cards">
+        <div class="card" *ngFor="let course of courses">
+          <img [src]="course.imageUrl" alt="{{ course.title }}" class="card-img">
+          <h4>{{ course.title }}</h4>
+          <p>{{ course.description }}</p>
+          <button (click)="verMas()">Ver más</button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Sección de Proyectos -->
+    <div class="section">
+      <h3>Proyectos Disponibles</h3>
+      <div class="cards">
+        <div class="card" *ngFor="let project of projects">
+          <img [src]="project.imageUrl" alt="{{ project.title }}" class="card-img">
+          <h4>{{ project.title }}</h4>
+          <p>{{ project.description }}</p>
+          <button (click)="verMas()">Ver más</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

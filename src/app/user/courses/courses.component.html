@@ -1,1 +1,34 @@
-<p>courses works!</p>
+<br>
+<br>
+<br>
+<br>
+
+<div class="courses-list">
+    <h2>Cursos Disponibles</h2>
+  
+    <table>
+      <thead>
+        <tr>
+            <th>Imagen</th>
+            <th>Título</th>
+            <th>Descripción</th>
+          <th>Profesor</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of courses">
+            <!-- quiero que se muestre la imagen -->
+            <td><img [src]="course.imageUrl" alt="{{ course.title }}" /></td>
+          <td>{{ course.title }}</td>
+          <td>{{ course.description }}</td>
+          <td>{{ getProfessorName(course.professorId) }}</td>
+          <td>
+            <button (click)="enrollCourse(course)">Inscribirme</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  

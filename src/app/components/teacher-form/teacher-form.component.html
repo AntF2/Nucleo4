@@ -1,0 +1,15 @@
+<h3>{{ editing ? 'Editar Profesor' : 'Agregar Nuevo Profesor' }}</h3>
+
+<form (ngSubmit)="saveTeacher()">
+  <div class="form-group">
+    <label for="name">Nombre</label>
+    <input type="text" id="name" [(ngModel)]="teacher.name" name="name" required />
+  </div>
+  
+  <div class="form-group">
+    <label for="specialization">Especialización</label>
+    <input type="text" id="specialization" [(ngModel)]="teacher.specialization" name="specialization" required />
+  </div>
+
+  <button type="submit">{{ editing ? 'Actualizar' : 'Agregar' }}</button>
+</form>

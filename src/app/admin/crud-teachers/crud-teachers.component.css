@@ -1,36 +1,136 @@
+/* Estilo General */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background-color: #f4f7fa;
+  color: #07074d;
+  margin: 0;
+}
+
 .teachers-list {
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+  color: #07074d;
+  margin-bottom: 40px;
+}
+
+/* Botón de agregar/volver */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #6a64f1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #5048e4;
+}
+
+/* Estilo para la lista de profesores */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #dde3ec;
+}
+
+th {
+  background-color: #f9f9f9;
+  font-weight: 600;
+  color: #07074d;
+}
+
+td {
+  color: #000000;
+}
+
+/* Estilo para las celdas de las acciones */
+td button {
+  padding: 8px 15px;
+  font-size: 14px;
+  background-color: #7b7b7b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  margin-right: 8px;
+}
+
+td button:hover {
+  background-color: #2f8bf5;
+}
+
+/* Mostrar formulario */
+app-teacher-form {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+}
+
+/* Estilos para el contenedor de profesores */
+.teachers-list table, .teachers-list button {
+  margin-bottom: 40px;
+}
+
+/* Animaciones y transiciones */
+button, td button {
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover, td button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para la versión móvil */
+@media (max-width: 768px) {
+  .teachers-list {
     padding: 20px;
   }
-  
+
+  h2 {
+    font-size: 24px;
+  }
+
   table {
     width: 100%;
-    border-collapse: collapse;
+    font-size: 14px;
   }
-  
-  table th, table td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
-  
+
   button {
-    margin: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  form {
-    margin-top: 20px;
-  }
-  
-  label {
-    display: block;
-    margin: 10px 0 5px;
-  }
-  
-  input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
+    font-size: 18px;
+    padding: 12px 20px;
   }
-  
+
+  td button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

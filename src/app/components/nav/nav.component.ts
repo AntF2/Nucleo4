@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { CartService } from '../../services/cart.service'; // Inyectar el servicio del carrito
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -13,11 +14,16 @@ import { RouterLink } from '@angular/router';
 export class NavComponent implements OnInit, AfterViewInit {
   currentUser: any;
   role: string | null = null;
+  totalItems: number = 0; // Almacenar el número total de elementos en el carrito
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private cartService: CartService // Inyectar el servicio de carrito
+  ) {}
 
   ngOnInit() {
     this.checkUserRole();
+    this.getCartItemCount(); // Llamar al método para obtener el total de elementos en el carrito
   }
 
   ngAfterViewInit() {
@@ -42,6 +48,14 @@ export class NavComponent implements OnInit, AfterViewInit {
       } else {
         this.role = null;
       }
+    });
+  }
+
+  // Método para obtener el número de elementos en el carrito
+  getCartItemCount() {
+    // Obtener el número total de elementos en el carrito desde el CartService
+    this.cartService.getCartItems().subscribe(cartItems => {
+      this.totalItems = cartItems.length; // Ahora podemos acceder a .length después de recibir los datos
     });
   }
 

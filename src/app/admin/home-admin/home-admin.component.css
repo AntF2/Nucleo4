@@ -1,0 +1,195 @@
+/* Estilo General */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+
+}
+
+body {
+  background-color: #f4f7fa;
+  color: #07074d;
+  margin: 0;
+}
+
+.dashboard {
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+  color: #07074d;
+  margin-bottom: 40px;
+}
+
+/* Overview Cards */
+.overview-cards {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 23%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #07074d;
+  margin-bottom: 15px;
+}
+
+.card p {
+  font-size: 30px;
+  font-weight: 700;
+  color: #6a64f1;
+}
+
+/* Lista de usuarios inscritos */
+.enrolled-users {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+}
+
+.enrolled-users h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #07074d;
+  margin-bottom: 20px;
+}
+
+.enrolled-users ul {
+  list-style-type: none;
+}
+
+.enrolled-users li {
+  font-size: 16px;
+  color: #536387;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #dde3ec;
+}
+
+.enrolled-users li span {
+  font-weight: 500;
+}
+
+/* Estilo para las tarjetas de proyectos */
+.projects, .courses {
+  margin-bottom: 40px;
+}
+
+.projects h3, .courses h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #07074d;
+  margin-bottom: 20px;
+}
+
+.project-cards, .course-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.project-card, .course-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  width: 30%;
+  transition: transform 0.3s ease-in-out;
+  text-align: center;
+}
+
+.project-card:hover, .course-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-card img, .course-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.project-card h4, .course-card h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #07074d;
+  margin-bottom: 10px;
+}
+
+.project-card p, .course-card p {
+  font-size: 14px;
+  color: #536387;
+}
+
+/* Fondo con imagen */
+.dashboard {
+  background-image: url('https://via.placeholder.com/1920x800'); /* Reemplazar con una imagen de fondo */
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  color: #fff;
+  padding: 60px;
+}
+
+/* Animaciones y transiciones */
+.card, .project-card, .course-card, .enrolled-users {
+  transition: all 0.3s ease-in-out;
+}
+
+.card:hover, .project-card:hover, .course-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.enrolled-users:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para la versión móvil */
+@media (max-width: 768px) {
+  .overview-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+
+  .project-card, .course-card {
+    width: 100%;
+  }
+
+  .enrolled-users {
+    width: 80%;
+  }
+}

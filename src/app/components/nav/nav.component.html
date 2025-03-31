@@ -3,52 +3,51 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-
 <header>
-    <a routerLink="/" class="logo"><i class="ri-home-heart-fill"></i><span>CodeNest
+  <a routerLink="/" class="logo"><i class="ri-home-heart-fill"></i><span>CodeNest</span></a>
 
-    </span></a>
+  <ul class="navbar">
+    <!-- Mostrar estas opciones solo si NO hay usuario autenticado -->
+    <ng-container *ngIf="!currentUser">
+      <li><a routerLink="/home" class="active">Inicio</a></li>
+      <li><a routerLink="/about">Nosotros</a></li>
+      <li><a routerLink="cursos">Servicios</a></li>
+      <li><a routerLink="/blog">Blog</a></li>
+      <li><a routerLink="/contact">Contacto</a></li>
+    </ng-container>
 
-    <ul class="navbar">
-        <!-- Mostrar estas opciones solo si NO hay usuario autenticado -->
-        <ng-container *ngIf="!currentUser">
-            <li><a routerLink="/home" class="active">Inicio</a></li>
-            <li><a routerLink="/about">Nosotros</a></li>
-            <li><a routerLink="#">Servicios</a></li>
-            <li><a routerLink="/blog">Blog</a></li>
-            <li><a routerLink="/contact">Contacto</a></li>
-        </ng-container>
+    <!-- Menú para usuario normal -->
+    <ng-container *ngIf="role === 'user'">
+      <li><a routerLink="/homeUser">Inicio</a></li>
+      <li><a routerLink="/course">Cursos</a></li>
+      <li><a routerLink="/projects">Proyectos</a></li>
+      <li><a routerLink="/profile" class="user"><i class="ri-user-fill"></i>Perfil</a></li>
 
-        <!-- Menú para usuario normal -->
-        <ng-container *ngIf="role === 'user'">
-            <li><a routerLink="/homeUser">Mi Cuenta</a></li>
-            <li><a routerLink="/course">Cursos</a></li>
-            <li><a routerLink="/messages">Mensajes</a></li>
-            <li><a routerLink="/postWorks">Publicaciones</a></li>
-            <li><a routerLink="/profile" class="user"><i class="ri-user-fill"></i>Perfil</a></li>
-        </ng-container>
+      <!-- Carrito de compras -->
+      <li><a routerLink="/cart" class="cart"><i class="ri-shopping-cart-line"></i> Carrito ({{ totalItems }})</a></li>
+    </ng-container>
 
-        <!-- Menú para administrador -->
-        <ng-container *ngIf="role === 'admin'">
-            <li><a routerLink="/homeAdmin">Inicio</a></li>
-            <li><a routerLink="/courses">Cursos</a></li>
-            <li><a routerLink="/teachers">Profesores</a></li>
-            <li><a routerLink="/users">Usuarios</a></li>
-            <li><a routerLink="/messages">Mensajes</a></li>
-        </ng-container>
-    </ul>
+    <!-- Menú para administrador -->
+    <ng-container *ngIf="role === 'admin'">
+      <li><a routerLink="/homeAdmin">Inicio</a></li>
+      <li><a routerLink="/courses">Cursos</a></li>
+      <li><a routerLink="/teachers">Profesores</a></li>
+      <li><a routerLink="/users">Usuarios</a></li>
+      <li><a routerLink="/project">Proyectos</a></li>
+    </ng-container>
+  </ul>
 
-    <div class="main">
-        <ng-container *ngIf="currentUser; else login">
-            <!-- Mostrar botón de cerrar sesión si el usuario está autenticado -->
-            <button (click)="logout()" class="logout-btn">Cerrar sesión</button>
-        </ng-container>
-        <ng-template #login>
-            <!-- Mostrar enlace de inicio de sesión/registro si el usuario no está autenticado -->
-            <a routerLink="/loginregister" class="user"><i class="ri-user-fill"></i>Iniciar Sesión/Registrarse</a>
-        </ng-template>
+  <div class="main">
+    <ng-container *ngIf="currentUser; else login">
+      <!-- Mostrar botón de cerrar sesión si el usuario está autenticado -->
+      <button (click)="logout()" class="logout-btn">Cerrar sesión</button>
+    </ng-container>
+    <ng-template #login>
+      <!-- Mostrar enlace de inicio de sesión/registro si el usuario no está autenticado -->
+      <a routerLink="/loginregister" class="user"><i class="ri-user-fill"></i>Iniciar Sesión/Registrarse</a>
+    </ng-template>
 
-        <!-- Menú desplegable (opcional) -->
-        <div class="bx bx-menu" id="menu-icon"></div>
-    </div>
+    <!-- Menú desplegable (opcional) -->
+    <div class="bx bx-menu" id="menu-icon"></div>
+  </div>
 </header>

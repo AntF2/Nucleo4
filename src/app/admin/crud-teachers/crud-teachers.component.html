@@ -1,7 +1,17 @@
+<br>
+<br>
+<br>
+<br>
+
 <div class="teachers-list">
     <h2>Profesores</h2>
-    
-    <table>
+  
+    <!-- Botón para agregar/volver -->
+    <button (click)="toggleForm()">{{ showForm ? 'Volver' : 'Agregar Profesor' }}</button>
+    <button (click)="refreshPage()">Refrescar</button>
+  
+    <!-- Lista de profesores -->
+    <table *ngIf="!showForm">
       <thead>
         <tr>
           <th>Nombre</th>
@@ -14,23 +24,14 @@
           <td>{{ teacher.name }}</td>
           <td>{{ teacher.specialization }}</td>
           <td>
-            <button (click)="editTeacher(teacher)">Editar</button>
+            <button (click)="toggleForm(teacher)">Editar</button>
             <button (click)="deleteTeacher(teacher.id)">Eliminar</button>
           </td>
         </tr>
       </tbody>
     </table>
-    
-    <h3>{{ editing ? 'Editar Profesor' : 'Agregar Nuevo Profesor' }}</h3>
-    
-    <form (ngSubmit)="saveTeacher()">
-      <label for="name">Nombre</label>
-      <input type="text" id="name" [(ngModel)]="teacher.name" name="name" required />
-      
-      <label for="specialization">Especialización</label>
-      <input type="text" id="specialization" [(ngModel)]="teacher.specialization" name="specialization" required />
-      
-      <button type="submit">{{ editing ? 'Actualizar' : 'Agregar' }}</button>
-    </form>
+  
+    <!-- Mostrar el formulario de agregar/editar -->
+    <app-teacher-form *ngIf="showForm" [teacher]="teacherToEdit" [editing]="editing" (teacherSaved)="teacherSaved()"></app-teacher-form>
   </div>
   

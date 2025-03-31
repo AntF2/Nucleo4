@@ -1,32 +1,80 @@
+/* Estilo General */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background-color: #f4f7fa;
+  color: #07074d;
+  margin: 0;
+}
+
 .container {
-    margin: 20px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  table, th, td {
-    border: 1px solid #ddd;
-  }
-  
-  th, td {
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+  color: #07074d;
+  margin-bottom: 40px;
+}
+
+/* Estilo de la tabla */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #dde3ec;
+}
+
+.table th {
+  font-size: 16px;
+  font-weight: 600;
+  color: #07074d;
+}
+
+.table td {
+  font-size: 14px;
+  color: #000000;
+}
+
+/* Botón de eliminar */
+.btn-danger {
+  background-color: #f44336;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #d32f2f;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .table th, .table td {
+    font-size: 12px;
     padding: 8px;
-    text-align: left;
   }
-  
-  th {
-    background-color: #f4f4f4;
+
+  h2 {
+    font-size: 24px;
   }
-  
-  button {
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #d9534f;
-    color: white;
-  }
-  
+}

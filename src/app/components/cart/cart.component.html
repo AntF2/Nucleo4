@@ -1,0 +1,42 @@
+<br>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="cart-container">
+    <h2>Carrito de Compras</h2>
+  
+    <div *ngIf="cartItems.length > 0; else emptyCart">
+      <div class="cart-items">
+        <div *ngFor="let item of cartItems" class="cart-item">
+          <div class="item-image">
+            <img [src]="item.imageUrl" alt="{{ item.title }}" />
+          </div>
+          <div class="item-details">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.price | currency }}</p>
+          </div>
+          <div class="item-actions">
+            <button (click)="removeFromCart(item.id)">Eliminar</button>
+          </div>
+        </div>
+      </div>
+  
+      <div class="cart-total">
+        <h3>Total: {{ getTotalPrice() | currency }}</h3>
+        <button class="clear-cart-btn" (click)="clearCart()">Vaciar Carrito</button>
+        <button class="purchase-btn" (click)="makePurchase()">Realizar Compra</button>
+      </div>
+    </div>
+  
+    <!-- Mensaje cuando el carrito está vacío -->
+    <ng-template #emptyCart>
+      <p>El carrito está vacío. Agrega proyectos al carrito para continuar.</p>
+    </ng-template>
+  </div>
+  

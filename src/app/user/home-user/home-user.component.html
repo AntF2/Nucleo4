@@ -1,1 +1,35 @@
-<p>home-user works!</p>
+<br>
+<br>
+<br>
+<br>
+
+<div class="dashboard-container">
+    <!-- Bienvenida al usuario -->
+    <div class="welcome">
+      <h1>Bienvenido, {{ currentUser?.name }}!</h1>
+      <p>¿Listo para seguir aprendiendo? Aquí tienes un resumen de tu actividad.</p>
+    </div>
+  
+    <!-- Resumen del carrito -->
+    <div class="cart-summary">
+      <h2>Resumen del carrito</h2>
+      <p>Total de artículos: {{ totalCartItems }}</p>
+      <p>Total: {{ totalCartPrice | currency }}</p>
+      <button (click)="goToCart()">Ir al carrito</button>
+    </div>
+  
+    <!-- Cursos disponibles -->
+    <div class="courses-section">
+      <h2>Cursos disponibles</h2>
+      <div class="courses-list">
+        <div *ngFor="let course of availableCourses" class="course-item">
+          <img [src]="course.imageUrl" alt="{{ course.title }}" />
+          <h3>{{ course.title }}</h3>
+          <p>{{ course.description }}</p>
+          <p>Precio: {{ course.price | currency }}</p>
+          <button (click)="enrollInCourse(course)">Inscribirme</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

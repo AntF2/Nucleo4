@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc, updateDoc, addDoc } from 'firebase/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { getFirestore, collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase/firestore';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +30,23 @@ export class CoursesService {
     return this.coursesSubject.asObservable();
   }
 
+  // Inscribir a un usuario en un curso
+  async enrollInCourse(course: any, userId: string) {
+    try {
+      // Guardar la inscripción en la colección de "enrollments"
+      const enrollmentsCollection = collection(this.db, 'enrollments');
+      await addDoc(enrollmentsCollection, {
+        courseId: course.id,
+        userId: userId, // Agregar el ID del usuario
+        courseTitle: course.title,
+        coursePrice: course.price
+      });
+      alert(`¡Felicidades! Te acabas de inscribir al curso: ${course.title}`);
+    } catch (error) {
+      console.error("Error al inscribir al curso: ", error);
+    }
+  }
+
   // Crear o actualizar un curso
   async saveCourse(course: any) {
     try {
@@ -52,7 +69,6 @@ export class CoursesService {
           imageUrl: course.imageUrl, // Agregar la URL de la imagen
           professorId: course.professorId, // Vincular profesor
         });
-
         // Después de crear el curso, actualizamos el curso con su ID
         course.id = newCourseRef.id;
       }
@@ -71,5 +87,32 @@ export class CoursesService {
     } catch (error) {
       console.error('Error al eliminar el curso: ', error);
     }
+  }
+
+  // Obtener el total de cursos (proyectos)
+  getTotalProjects() {
+    return new Observable<number>((observer) => {
+      this.getCourses().subscribe((courses) => {
+        observer.next(courses.length);
+        observer.complete();
+      });
+    });
+  }
+
+  // Obtener los usuarios inscritos a cualquier curso
+  getEnrolledUsers() {
+    const enrollmentsCollection = collection(this.db, 'enrollments');
+    return new Observable<any[]>((observer) => {
+      getDocs(enrollmentsCollection).then((querySnapshot) => {
+        const enrolledUsers: any[] = [];
+        querySnapshot.forEach((doc) => {
+          enrolledUsers.push({ ...doc.data(), id: doc.id });
+        });
+        observer.next(enrolledUsers);
+        observer.complete();
+      }).catch((error) => {
+        observer.error(error);
+      });
+    });
   }
 }

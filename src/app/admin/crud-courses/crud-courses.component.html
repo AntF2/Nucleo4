@@ -1,7 +1,14 @@
 <div class="courses-list">
     <h2>Cursos</h2>
-    
-    <table>
+  
+    <!-- Botón para refrescar la página -->
+    <button (click)="refreshPage()">Refrescar</button>
+  
+    <!-- Botón para agregar/volver -->
+    <button (click)="toggleForm()">{{ showForm ? 'Volver' : 'Agregar Curso' }}</button>
+  
+    <!-- Lista de cursos -->
+    <table *ngIf="!showForm">
       <thead>
         <tr>
           <th>Título</th>
@@ -20,34 +27,14 @@
           <td>{{ getProfessorName(course.professorId) }}</td>
           <td><img [src]="course.imageUrl" alt="{{ course.title }}" width="50" /></td>
           <td>
-            <button (click)="editCourse(course)">Editar</button>
+            <button (click)="toggleForm(course)">Editar</button>
             <button (click)="deleteCourse(course.id)">Eliminar</button>
           </td>
         </tr>
       </tbody>
     </table>
-    
-    <h3>{{ editing ? 'Editar Curso' : 'Agregar Nuevo Curso' }}</h3>
-    
-    <form (ngSubmit)="saveCourse()">
-      <label for="title">Título</label>
-      <input type="text" id="title" [(ngModel)]="course.title" name="title" required />
-      
-      <label for="description">Descripción</label>
-      <textarea id="description" [(ngModel)]="course.description" name="description" required></textarea>
-      
-      <label for="price">Precio</label>
-      <input type="number" id="price" [(ngModel)]="course.price" name="price" required />
-      
-      <label for="professor">Profesor</label>
-      <select id="professor" [(ngModel)]="course.professorId" name="professor" required>
-        <option *ngFor="let teacher of teachers" [value]="teacher.id">{{ teacher.name }}</option>
-      </select>
   
-      <label for="imageUrl">URL de la Imagen</label>
-      <input type="text" id="imageUrl" [(ngModel)]="course.imageUrl" name="imageUrl" placeholder="URL de la imagen" required />
-  
-      <button type="submit">{{ editing ? 'Actualizar' : 'Agregar' }}</button>
-    </form>
+    <!-- Mostrar el formulario de agregar/editar -->
+    <app-course-form *ngIf="showForm" [course]="courseToEdit" [editing]="editing" (courseSaved)="courseSaved()"></app-course-form>
   </div>
   

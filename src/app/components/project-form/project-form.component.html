@@ -1,0 +1,10 @@
+<!-- Formulario para crear o editar un proyecto -->
+<form (ngSubmit)="onSave()">
+    <input type="text" [(ngModel)]="title" name="title" placeholder="Título del proyecto" required />
+    <textarea [(ngModel)]="description" name="description" placeholder="Descripción del proyecto" required></textarea>
+    <input type="number" [(ngModel)]="price" name="price" placeholder="Precio" required />
+    <input type="text" [(ngModel)]="imageUrl" name="imageUrl" placeholder="URL de la imagen" required />
+    
+    <button type="submit">{{ selectedProject ? 'Actualizar Proyecto' : 'Crear Proyecto' }}</button>
+    <button type="button" (click)="onCancel()">Cancelar</button>
+</form>
